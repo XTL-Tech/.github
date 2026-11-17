@@ -1,0 +1,30 @@
+name: XTL organization profile contract check
+on:
+  pull_request:
+    paths:
+      - 'xtl.integration.json'
+      - '.github/workflows/xtl-profile-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Validate organization integration manifest (no network)
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const x=JSON.parse(fs.readFileSync('xtl.integration.json','utf8'));
+          assert.equal(x.service_id,'.github');
+          assert.equal(x.repository,'XTL-Tech/.github');
+          assert.equal(x.schema_version,'1.0');
+          assert.equal(x.contract_version,'1.0.0-draft');
+          assert.equal(x.runtime_integration_state,'not_activated');
+          assert.equal(x.trust_model,'none');
+          assert.equal(x.canonical_identity_authority,'XTL-Tech/xtl-mvp');
+          assert.ok(Array.isArray(x.planned_dependencies));
+          console.log('XTL organization profile: valid draft; no integrations activated');
+          NODE
