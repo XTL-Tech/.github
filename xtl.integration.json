@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "service_id": ".github",
+  "repository": "XTL-Tech/.github",
+  "domain": "governance",
+  "lane": "P1",
+  "data_class": "internal",
+  "trust_model": "none",
+  "canonical_identity_authority": "XTL-Tech/xtl-mvp",
+  "contract_source": "https://github.com/XTL-Tech/xtl-foundations/pull/2",
+  "contract_version": "1.0.0-draft",
+  "planned_dependencies": [
+    "xtl-quality"
+  ],
+  "tenant_resolution": "not_applicable_to_public_or_docs",
+  "runtime_integration_state": "not_activated",
+  "note": "Draft declaration only: no network connectivity, DB data sharing, permissions, or production deploy is enabled."
+}
